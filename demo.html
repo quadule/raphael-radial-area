@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Raphaël · Radial Area Chart</title>
+    <style>
+      body {
+        background: #333;
+      }
+      #holder {
+        width: 400px;
+        height: 400px;
+        margin: 50px auto;
+      }
+    </style>
+    <script src="raphael.js"></script>
+    <script src="radialArea.js"></script>
+    <script>
+      window.onload = function() {
+        var chart = Raphael("holder", 400, 400).radialArea([
+          { value: 0.3, fill: '#f0f' },
+          { value: 0.1, fill: '#f00' },
+          { value: 0.7, fill: '#0ff' },
+          { value: 0.5, fill: '#00f' },
+          { value: 0.2, fill: '#0f0' },
+          { value: 0.4, fill: '#ff0' },
+          { value: 0.8, fill: '#ccc' },
+          { value: 0.6, fill: '#fff' }
+        ]).attr('stroke-width', 2);
+        
+        for(var i in chart) {
+          (function(slice) {
+            slice.transform('s0 0 200 200');
+            setTimeout(function() {
+              slice.animate({transform: "s1 1 200 200"}, 400, 'easeOut');
+            }, 500 + i * 50)
+          })(chart[i]);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="holder"></div>
+  </body>
+</html>
